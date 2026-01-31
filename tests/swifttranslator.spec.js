@@ -5,7 +5,7 @@ test.describe("SwiftTranslator - Singlish to Sinhala Automation", () => {
     await page.goto("https://www.swifttranslator.com/", { waitUntil: "domcontentloaded" });
   });
 
-  // ✅ Helper: get input textbox safely
+  // Helper: get input textbox safely
   async function getFields(page) {
     // Input textbox (most stable)
     const singlishBox = page.getByRole("textbox");
@@ -18,12 +18,12 @@ test.describe("SwiftTranslator - Singlish to Sinhala Automation", () => {
     return { singlishBox, body };
   }
 
-  // ✅ Helper: wait until Sinhala output appears anywhere (Sinhala Unicode range)
+  // Helper: wait until Sinhala output appears anywhere (Sinhala Unicode range)
   async function waitForSinhalaOutput(body) {
     await expect(body).toContainText(/[\u0D80-\u0DFF]/, { timeout: 15000 });
   }
 
-  // ✅ Helper: run a test case
+  //  Helper: run a test case
   async function runCase(page, tcId, inputText) {
     const { singlishBox, body } = await getFields(page);
 
@@ -43,7 +43,7 @@ test.describe("SwiftTranslator - Singlish to Sinhala Automation", () => {
     return bodyText;
   }
 
-  // ✅ UI TEST (Stable)
+  //  UI TEST (Stable)
   test("Pos_UI_0001 - Sinhala output updates in real-time when typing", async ({ page }) => {
     const { singlishBox, body } = await getFields(page);
 
@@ -51,7 +51,7 @@ test.describe("SwiftTranslator - Singlish to Sinhala Automation", () => {
     await waitForSinhalaOutput(body);
   });
 
-  // -------- POSITIVE FUNCTIONAL (24) --------
+  // POSITIVE FUNCTIONAL (24) 
   test("Pos_Fun_0001", async ({ page }) => {
     await runCase(page, "Pos_Fun_0001", "aayuboowan!");
   });
@@ -152,7 +152,7 @@ test.describe("SwiftTranslator - Singlish to Sinhala Automation", () => {
     );
   });
 
-  // -------- NEGATIVE FUNCTIONAL (10) --------
+  //  NEGATIVE FUNCTIONAL (10)
   test("Neg_Fun_0001", async ({ page }) => {
     await runCase(page, "Neg_Fun_0001", "mamageharayanavaa");
   });
